@@ -364,15 +364,13 @@
         <div class="d-flex flex-row justify-content-between">
             <?php
             $query = "SELECT *
-                                        FROM charlas C
-                                        INNER JOIN usuarios U
-                                        ON C.id_usuario = U.id_usuario
-                                        JOIN categorias CA
-                                        ON C.id_categoria = CA.id_cat
-                                        WHERE C.id_categoria = 1
-                                        LIMIT 3";
+						FROM charlas C
+						INNER JOIN usuarios U ON C.id_usuario = U.id_usuario
+						JOIN categorias CA ON C.id_categoria = CA.id_cat
+						WHERE C.id_categoria = 1
+						LIMIT 3";
             $result_task = mysqli_query($conn, $query);
-            while ($row = mysqli_fetch_Array($result_task)) {
+            while ($row = mysqli_fetch_assoc($result_task)) {
             ?>
             <!-- CARD INICIO -->
             <div class="card">
@@ -415,17 +413,17 @@
 
                         <?php
                         $idcharla = $row['id_char'];
-                        $query = "SELECT *
+                        $query1 = "SELECT *
                                                 FROM documentos D
                                                 INNER JOIN charlas C
                                                 ON D.id_charla_doc = C.id_char
                                                 WHERE id_charla_doc = $idcharla";
-                        $result_task = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_Array($result_task)) {
+                        $result_task1 = mysqli_query($conn, $query1);
+                        while ($row1 = mysqli_fetch_Array($result_task1)) {
                             ?><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" fill="#707070">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                             </svg>
-                            <p><a href="<?php echo $row['ruta_doc'] ?>" download="<?php echo $row['nombre_doc'] ?>"><?php echo $row['nombre_doc'] ?></a></p>
+                            <p><a href="<?php echo $row['ruta_doc'] ?>" download="<?php echo $row1['nombre_doc'] ?>"><?php echo $row1['nombre_doc'] ?></a></p>
                             <?php
                         }
                         ?>
