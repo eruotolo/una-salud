@@ -361,23 +361,24 @@
             <img src="assets/img/nuevoequipo/linea-02.svg" alt="">
         </div>
 
-        <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-wrap justify-content-between">
             <?php
             $query = "SELECT *
-                                        FROM charlas C
-                                        INNER JOIN usuarios U
-                                        ON C.id_usuario = U.id_usuario
-                                        JOIN categorias CA
-                                        ON C.id_categoria = CA.id_cat
-                                        WHERE C.id_categoria = 1
-                                        LIMIT 3";
+                        FROM charlas C
+                        INNER JOIN usuarios U
+                        ON C.id_usuario = U.id_usuario
+                        JOIN categorias CA
+                        ON C.id_categoria = CA.id_cat
+                        WHERE C.id_categoria = 1
+                        LIMIT 3";
             $result_task = mysqli_query($conn, $query);
             while ($row = mysqli_fetch_Array($result_task)) {
             ?>
             <!-- CARD INICIO -->
             <div class="card">
                 <div class="card-head d-flex align-items-center justify-content-center">
-                    <a href="#">
+
+                    <a href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
@@ -420,8 +421,8 @@
                                                 INNER JOIN charlas C
                                                 ON D.id_charla_doc = C.id_char
                                                 WHERE id_charla_doc = $idcharla";
-                        $result_task = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_Array($result_task)) {
+                        $result_task1 = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_Array($result_task1)) {
                             ?><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" fill="#707070">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                             </svg>
@@ -446,6 +447,21 @@
 
 </section>
 
+<!-- MODAL VIDEO YOUTUBE -->
+
+<!-- Modal -->
+<div class="modal fade" id="videoyoutube" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-video-body">
+                <iframe width="800" height="460" src="https://www.youtube.com/embed/<?php echo $row['link_video'] ?>" title="Standly - Panamera (Video Oficial)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include('includes/footer.php') ?>
 
@@ -453,6 +469,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 <script>
     $(".hover").mouseleave(
@@ -470,6 +489,14 @@
     });
 </script>
 
+<script>
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+</script>
 
 <!-- Core theme JS-->
 <script src="js/carrousel.js"></script>

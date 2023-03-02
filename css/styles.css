@@ -5230,6 +5230,7 @@ color:#149176;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin-bottom: 20px;
 }
 .card > hr {
   margin-right: 0;
@@ -12664,4 +12665,7 @@ footer a:hover, footer a:active, footer a:focus {
   width: 15px;
   margin-right: 10px;
   margin-top: -15px;
+}
+.modal-video-body{
+  padding: 0px;
 }
