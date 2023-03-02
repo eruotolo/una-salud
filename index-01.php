@@ -361,23 +361,26 @@
             <img src="assets/img/nuevoequipo/linea-02.svg" alt="">
         </div>
 
-        <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-wrap justify-content-between">
             <?php
             $query = "SELECT *
-                                        FROM charlas C
-                                        INNER JOIN usuarios U
-                                        ON C.id_usuario = U.id_usuario
-                                        JOIN categorias CA
-                                        ON C.id_categoria = CA.id_cat
-                                        WHERE C.id_categoria = 1
-                                        LIMIT 3";
+                        FROM charlas C
+                        INNER JOIN usuarios U
+                        ON C.id_usuario = U.id_usuario
+                        JOIN categorias CA
+                        ON C.id_categoria = CA.id_cat
+                        JOIN categorias_2 CA2
+                        ON C.id_categoria_2 = CA2.id_cat_2
+                        LIMIT 3";
             $result_task = mysqli_query($conn, $query);
             while ($row = mysqli_fetch_Array($result_task)) {
+                $nombre = $row['nombre'];
+                $descripcion = $row['descripcion'];
             ?>
             <!-- CARD INICIO -->
             <div class="card">
                 <div class="card-head d-flex align-items-center justify-content-center">
-                    <a href="#">
+                    <a href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
@@ -391,10 +394,10 @@
                         <h5 class="cat-salud"><?php echo $row['nombre_cat_2'] ?></h5>
                     </div>
                     <div class="tit-card">
-                        <h1><?php echo $row['nombre'] ?></h1>
+                        <h1><?php echo substr($nombre, 0,70)?> </h1>
                     </div>
                     <div class="card-descrip">
-                        <p><?php echo $row['descripcion'] ?></p>
+                        <p><?php echo substr($descripcion, 0,250) ?> ...</p>
                     </div>
                 </div>
 
@@ -403,25 +406,24 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="15.8" height="18.434" viewBox="0 0 15.8 18.434">
                             <path id="Icon_material-person-pin" data-name="Icon material-person-pin" d="M18.544,3H6.256A1.755,1.755,0,0,0,4.5,4.756V17.044A1.755,1.755,0,0,0,6.256,18.8H9.767L12.4,21.433,15.033,18.8h3.511A1.761,1.761,0,0,0,20.3,17.044V4.756A1.761,1.761,0,0,0,18.544,3ZM12.4,5.9a2.37,2.37,0,1,1-2.37,2.37A2.371,2.371,0,0,1,12.4,5.9Zm5.267,9.392H7.133V14.5c0-1.756,3.511-2.721,5.267-2.721s5.267.966,5.267,2.721Z" transform="translate(-4.5 -3)" fill="#707070"/>
                         </svg>
-                        <p><?php echo $row['nombre_usuario'] ?></p>
+                        <p><?php echo $row['autor'] ?></p>
                     </div>
                     <div class="footer-fecha d-flex flex-row">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18.4" height="20.444" viewBox="0 0 18.4 20.444">
                             <path id="Icon_material-date-range" data-name="Icon material-date-range" d="M10.633,12.2H8.589v2.044h2.044Zm4.089,0H12.678v2.044h2.044Zm4.089,0H16.767v2.044h2.044Zm2.044-7.156H19.833V3H17.789V5.044H9.611V3H7.567V5.044H6.544A2.035,2.035,0,0,0,4.51,7.089L4.5,21.4a2.044,2.044,0,0,0,2.044,2.044H20.856A2.05,2.05,0,0,0,22.9,21.4V7.089A2.05,2.05,0,0,0,20.856,5.044Zm0,16.356H6.544V10.156H20.856Z" transform="translate(-4.5 -3)" fill="#707070"/>
                         </svg>
-                        <p>Fecha de Publicación: <?php echo date("d-m-Y", strtotime($row['create_at'])); ?></p>
+                        <p>Fecha de Publicación: <?php echo date("d/m/Y", strtotime($row['create_at'])); ?></p>
                     </div>
                     <div class="footer-download d-flex flex-row">
-
                         <?php
                         $idcharla = $row['id_char'];
                         $query = "SELECT *
-                                                FROM documentos D
-                                                INNER JOIN charlas C
-                                                ON D.id_charla_doc = C.id_char
-                                                WHERE id_charla_doc = $idcharla";
-                        $result_task = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_Array($result_task)) {
+                                    FROM documentos D
+                                    INNER JOIN charlas C
+                                    ON D.id_charla_doc = C.id_char
+                                    WHERE id_charla_doc = $idcharla";
+                        $result_task1 = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_Array($result_task1)) {
                             ?><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" fill="#707070">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                             </svg>
@@ -447,6 +449,20 @@
 </section>
 
 
+<!-- Modal -->
+<div class="modal fade" id="videoyoutube" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-video-body">
+                <iframe width="799" height="460" src="https://www.youtube.com/embed/<?php echo $row['link_video'] ?>" title="Standly - Panamera (Video Oficial)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include('includes/footer.php') ?>
 
 <!-- Feedback Modal-->
@@ -463,14 +479,20 @@
 </script>
 
 
-
 <script>
     $(document).ready(function () {
         $("#cargaFade").fadeIn();
     });
 </script>
 
+<script>
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
 
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+</script>
 <!-- Core theme JS-->
 <script src="js/carrousel.js"></script>
 <script src="js/scripts.js"></script>
