@@ -12666,6 +12666,13 @@ footer a:hover, footer a:active, footer a:focus {
   margin-right: 10px;
   margin-top: -15px;
 }
+.footer-download > p > a{
+  font-size: 14px;
+  line-height: 14px;
+  padding-top: 3px;
+  color: #707070;
+  text-decoration: none;
+}
 .modal-video-body{
   padding: 0px;
 }
