@@ -295,7 +295,7 @@ if ($query_run) {
                                             } else {
                                                 if ($pagina > 1)
                                                     $ant = $_REQUEST["nume"] - 1;
-                                                echo "<a class='page-link' aria-label='Anterior' href='biblioteca.php?nume=1'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Anterior</span></a>";
+                                                echo "<a class='page-link' aria-label='Anterior' href='biblioteca-old.php?nume=1'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Anterior</span></a>";
                                                 echo "<li class='page-item '><a class='page-link' href='biblioteca.php?nume=" . ($pagina - 1) . "' >" . $ant . "</a></li>";
                                             }
                                             echo "<li class='page-item active'><a class='page-link' >" . $_REQUEST["nume"] . "</a></li>";

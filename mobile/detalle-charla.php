@@ -54,7 +54,7 @@ if ($query_run) {
         <nav class="navbar bg-light fixed-top">
             <div class="container-fluid">
 
-                <a class="navbar-brand logo" href="../index.php"><img src="assets/img/logo-Una-salud-18.svg" alt="Logo"></a>
+                <a class="navbar-brand logo" href="../index-old.php"><img src="assets/img/logo-Una-salud-18.svg" alt="Logo"></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                         aria-controls="offcanvasNavbar">

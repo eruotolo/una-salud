@@ -16,13 +16,13 @@ session_start();
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">Titulo</label>
+                                        <label for="exampleFormControlTextarea1">Título</label>
                                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Titulo" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                                    <label for="exampleFormControlTextarea1">Descripción (máx 250 caracteres)</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" maxlength="250" required></textarea>
                                 </div>
                             </div>
                             <div class="row">

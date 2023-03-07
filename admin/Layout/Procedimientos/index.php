@@ -16,7 +16,6 @@ session_start();
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titulo</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Descripcion</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Categoria</th>
@@ -37,14 +36,6 @@ session_start();
                                     while ($row = mysqli_fetch_Array($result_task)) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm"><?php echo $row['id_proc'] ?></h6>
-                                                    </div>
-                                                </div>
-                                            </td>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
 

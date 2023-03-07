@@ -62,6 +62,9 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
   --bs-body-bg: #fff;
+  --color-azul: #1c3c7c;
+  --color-verde: #149176;
+  --color-rosado: #EA7EAD;
 }
 
 *,
@@ -12395,19 +12398,22 @@ footer a:hover, footer a:active, footer a:focus {
   height: 60px;
 }
 .info-contacto > h6{
+  font-family: "Open Sans";
   color: #EB7FAE;
-  font-style: italic;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 18px;
   line-height: 18px;
+  letter-spacing: 0.05em;
   margin-bottom: 3px;
 }
 .info-contacto > a{
+  font-family: "Open Sans";
+  font-weight: 400;
   color: #0D0D0D;
-  font-style: italic;
-  font-weight: 300;
   font-size: 16px;
   line-height: 16px;
+  letter-spacing: 0px;
+  color: #0D0D0D;
 }
 .info-contacto > a:hover{
   color: #149176;
@@ -12438,7 +12444,8 @@ footer a:hover, footer a:active, footer a:focus {
 .tar-inst-titulo > img{
   width: 16%;
 }
-.tar-instituciones img{
+
+.tar-instituciones > a {
   width: 32%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
@@ -12446,7 +12453,10 @@ footer a:hover, footer a:active, footer a:focus {
   height: 276px;
   background-color: #FFFFFF;
 }
-
+.tar-instituciones > a > img{
+  width: 100%;
+  border-radius: 20px;
+}
 .snip1576 {
   background-color: #1c3c7c;
   color: #444;
@@ -12508,7 +12518,7 @@ footer a:hover, footer a:active, footer a:focus {
 
 .snip1576:hover > img,
 .snip1576.hover > img {
-  opacity: 0.1;
+  opacity: 0;
 }
 
 .snip1576:hover:after,
@@ -12530,36 +12540,42 @@ footer a:hover, footer a:active, footer a:focus {
   padding: 20px;
 }
 .info-equipo h2{
-  color: #EE7AAD;
-  font-size: 16px;
-  line-height: 16px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-family: "Open Sans";
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: #ee7aad;
 }
 .info-equipo h1{
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 600;
+  font-size: 22px;
+  font-family: "Open Sans";
+  font-weight: bold;
   color: #FFFFFF;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .info-equipo h4{
-  font-size: 16px;
-  line-height: 16px;
-  font-style: italic;
+  font-family: "Open Sans";
+  font-size: 18px;
+  line-height: 22px;
   font-weight: 300;
   color: #FFFFFF;
   padding-bottom: 10px;
 }
 .info-equipo p{
-  font-size: 12px;
+  font-family: "Open Sans";
+  font-size: 14px;
+  line-height: 18px;
   font-weight: 300;
   color: #FFFFFF;
 }
 .info-equipo a{
-  font-size: 13px;
-  font-weight: 300;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -12583,9 +12599,9 @@ footer a:hover, footer a:active, footer a:focus {
   color: #FFFFFF;
   text-decoration: none;
   border-radius: 10px;
-  font-style: italic;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 600;
+  font-family: "Open Sans";
 }
 .news-vermas a:hover{
   background-color: #EE7AAD;
@@ -12596,13 +12612,45 @@ footer a:hover, footer a:active, footer a:focus {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 6px;
 }
-.card-head{
+.card-head-charlas{
   height: 160px;
-  background-color: #223a7b;
+  background-image: url("../assets/img/biblioteca/background-charlas.png");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   border-top-right-radius: 6px ;
   border-top-left-radius: 6px;
 }
-.card-head > a > svg{
+
+.card-head-procedimientos{
+  height: 160px;
+  background-image: url("../assets/img/biblioteca/background-procedimientos.png");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  border-top-right-radius: 6px ;
+  border-top-left-radius: 6px;
+}
+
+.card-head-documentos{
+  height: 160px;
+  background-image: url("../assets/img/biblioteca/background-documentos.png");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  border-top-right-radius: 6px ;
+  border-top-left-radius: 6px;
+}
+
+.card-head-charlas > a > svg,
+.card-head-procedimientos > a > svg,
+.card-head-documentos > a > svg{
   color: #FFFFFF;
   height: 60px;
 }
@@ -12615,7 +12663,21 @@ footer a:hover, footer a:active, footer a:focus {
   padding: 20px 0px 0px 0px;
 }
 .cat-charlas{
-  background:#149176;
+  background: var(--color-azul);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  margin-right: 10px;
+}
+.cat-procedimientos{
+  background: var(--color-verde);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  margin-right: 10px;
+}
+.cat-documentos{
+  background: var(--color-rosado);
   color: #fff;
   font-size: 0.8rem;
   padding: 0.2rem 1rem 0.2rem 1rem;
@@ -12631,16 +12693,17 @@ footer a:hover, footer a:active, footer a:focus {
   height: 100px;
 }
 .tit-card h1{
-  color: #303230;
+  color: #191919;
   font-size: 1.4rem;
   width: 100%;
   margin-bottom: 1.3rem;
+  font-weight: bold;
 }
 .card-descrip{
   height: 120px;
 }
 .card-descrip p{
-  color: #303230;
+  color: #707070;
   font-size: 13px;
   text-align: justify;
 }
@@ -12648,12 +12711,22 @@ footer a:hover, footer a:active, footer a:focus {
 .footer-fecha{
   margin-bottom: 0px;
 }
-.footer-autor svg,
+.footer-autor svg{
+  width: 13px;
+  margin-right: 10px;
+  color: #191919;
+}
+
 .footer-fecha svg{
   width: 13px;
   margin-right: 10px;
 }
-.footer-autor p,
+.footer-autor p{
+  font-size: 14px;
+  line-height: 14px;
+  padding-top: 3px;
+  color: #191919;
+}
 .footer-fecha p,
 .footer-download p{
   font-size: 14px;
@@ -12661,10 +12734,10 @@ footer a:hover, footer a:active, footer a:focus {
   padding-top: 3px;
   color: #707070;
 }
-.footer-download svg{
-  width: 15px;
-  margin-right: 10px;
-  margin-top: -15px;
+.footer-download > p > svg{
+  width: 18px;
+  margin-right: 2px;
+  margin-top: -5px;
 }
 .footer-download > p > a{
   font-size: 14px;
@@ -12677,3 +12750,39 @@ footer a:hover, footer a:active, footer a:focus {
   padding: 0px;
 }
 
+/* ------------------------------- NUEVA BIBLIOTECA ------------------------------- */
+#new-biblioteca{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.head-biblioteca{
+  background-color: var(--color-azul);
+  padding: 50px 20px;
+}
+.title-biblioteca h1{
+  color: #FFFFFF;
+  font-size: 26px;
+  line-height: 26px;
+}
+#filtro-biblioteca{
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+.filtro-biblioteca p{
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+.filtro-biblioteca select{
+  width: 26%;
+  border-radius: 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
+}
+.contenido-biblioteca{
+    padding-bottom: 70px;
+}
+.card-documentos{
+  margin-right: 25px;
+}

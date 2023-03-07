@@ -1,5 +1,5 @@
 <form action="buscador.php" method="post">
-    <label for="">Búsqueda</label>
+    <!--<label for="">Búsqueda</label>-->
     <div class="input-wrapper">
 
         <input type="search" class="input" name="buscar" id="buscar" >
