@@ -99,7 +99,7 @@
                         <!-- CARD INICIO -->
                         <div class="card">
                             <div class="card-head-charlas d-flex align-items-center justify-content-center">
-                                <a href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
+                                <a class='youtubevideo' src='https://www.youtube.com/embed/<?php echo $row['link_video'] ?>' href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
@@ -179,7 +179,7 @@
                     <!-- CARD INICIO -->
                         <div class="card">
                             <div class="card-head-procedimientos d-flex align-items-center justify-content-center">
-                                <a href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube"><a href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
+                                <a class='youtubevideo' src='https://www.youtube.com/embed/<?php echo $procedimientos['link_video'] ?>' href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
@@ -308,7 +308,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-video-body">
-                <iframe width="799" height="460" src="https://www.youtube.com/embed/<?php echo $row['link_video'] ?>" title="Standly - Panamera (Video Oficial)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id='youtubeplay' width="799" height="460" src="" title="Standly - Panamera (Video Oficial)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -330,6 +330,20 @@
 
 <!-- Optional JavaScript; choose one -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+	$(document).ready(function() {
+		var url;
+		$('.youtubevideo').on('click',function() {
+			url = $(this).attr('src');
+			$("#youtubeplay").attr('src', url);
+		});
+		
+		$("#videoyoutube").on('hide.bs.modal', function() {
+			$("#youtubeplay").attr('src', '');
+		});
+	});
+</script>
 
 <script>
     //Filter Recruiters
