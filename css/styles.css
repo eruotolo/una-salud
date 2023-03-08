@@ -12751,14 +12751,13 @@ footer a:hover, footer a:active, footer a:focus {
 }
 
 /* ------------------------------- NUEVA BIBLIOTECA ------------------------------- */
+
 #new-biblioteca{
   padding-top: 0px;
   padding-bottom: 0px;
+  background-color: #f4f4f4;
 }
-.head-biblioteca{
-  background-color: var(--color-azul);
-  padding: 50px 20px;
-}
+
 .title-biblioteca h1{
   color: #FFFFFF;
   font-size: 26px;
@@ -12785,4 +12784,78 @@ footer a:hover, footer a:active, footer a:focus {
 }
 .card-documentos{
   margin-right: 25px;
+}
+
+/* ------------------------------- RESULTADO BIBLIOTECA ------------------------------- */
+
+#sh-buscador{
+  background-color: #1c3c7c;
+  height: 220px;
+}
+#sh-resultado{
+  background-color: #f4f4f4;
+}
+.cont-resultado{
+  background-color: #FFFFFF;
+  padding: 50px;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  border-radius: 10px;
+}
+.head-biblioteca{
+ padding-top: 40px;
+}
+.item-search{
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+.sh-icon > a > img{
+  width: 45px;
+}
+.sh-titulo{
+  padding-right: 10px;
+}
+.sh-titulo h5{
+  color: #191919;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.sh-titulo h4{
+  font-size: 14px;
+  line-height: 14px;
+  color: #191919;
+}
+.sh-titulo > h4 >svg{
+  margin-right: 4px;
+}
+.sh-titulo p{
+  font-size: 14px;
+  line-height: 14px;
+}
+.sh-titulo > p >svg{
+  width: 18px;
+  color: #707070;
+}
+.sh-titulo > p > a{
+  text-decoration: none;
+  color: #707070;
+}
+.sh-fecha > p{
+  font-family: "Open Sans";
+  font-size: 16px;
+  color: #707070;
+  font-weight: normal;
+}
+.sh-fecha > p > svg{
+  width: 22px;
+  color: #707070;
+  margin-right: 3px;
+}
+.sh-categoria{
+  padding-right: 20px;
+}
+.sh-categoria > h5{
+  text-align: center;
 }

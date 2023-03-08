@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="81" viewBox="0 0 66 81">
+  <g id="Icon_feather-file-text" data-name="Icon feather-file-text" transform="translate(-3)">
+    <g id="Grupo_25" data-name="Grupo 25">
+      <path id="Trazado_1" data-name="Trazado 1" d="M43.5,3h-30A7.5,7.5,0,0,0,6,10.5v60A7.5,7.5,0,0,0,13.5,78h45A7.5,7.5,0,0,0,66,70.5v-45Z" fill="none" stroke="#b9b9b9" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+      <path id="Trazado_2" data-name="Trazado 2" d="M21,3V25.5H43.5" transform="translate(22.5)" fill="none" stroke="#b9b9b9" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+      <path id="Trazado_3" data-name="Trazado 3" d="M42,19.5H12" transform="translate(9 24.75)" fill="none" stroke="#b9b9b9" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+      <path id="Trazado_4" data-name="Trazado 4" d="M42,25.5H12" transform="translate(9 33.75)" fill="none" stroke="#b9b9b9" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+      <path id="Trazado_5" data-name="Trazado 5" d="M19.5,13.5H12" transform="translate(9 15.75)" fill="none" stroke="#b9b9b9" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    </g>
+  </g>
+</svg>

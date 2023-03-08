@@ -46,148 +46,197 @@
     <?php include('includes/nav.php') ?>
     <!-- HEADER SLIDER-->
 
-    <div class="container">
-        <div class="col-12">
-            <div class="row menu-top">
-                <div class="col-5">
-                    <div class="d-flex align-items-start me-3 ps-lg-5 pt-1">
-                        <h1>Biblioteca</h1>
-                    </div>
+    <section id="sh-buscador">
+        <div class="container head-biblioteca">
+            <div class="row">
+                <div class="col-5 title-biblioteca">
+                    <h1>Biblioteca</h1>
                 </div>
-
-
-                <div class="col-7 ps-2 ">
+                <div class="col-7">
                     <?php include('includes/buscador.php') ?>
                 </div>
             </div>
         </div>
-        <div class="row gris">
+    </section>
 
-            <div class="col-5">
-                <div class="content-tabs-link">
-                    <div class="d-flex align-items-start">
-                        <div class="nav flex-column nav-pills me-3 ps-lg-6 pt-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a href="biblioteca.php" class="boton-volver"> Volver</a>
+    <section id="sh-resultado">
+        <div class="container cont-resultado">
+            <div class="row">
+                <div class="col-12">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-charlas-tab">
+                            <!-- Consulta bdd -->
+                            <?php
 
+                            $buscar = $_POST['buscar'];
+
+                            if (!empty($buscar)) {
+                                $query = "SELECT *
+                                          FROM charlas C
+                                          INNER JOIN usuarios U
+                                          ON C.id_usuario = U.id_usuario
+                                          JOIN categorias CA
+                                          ON C.id_categoria = CA.id_cat
+                                          JOIN categorias_2 CA2
+                                          ON C.id_categoria_2 = CA2.id_cat_2
+                                          WHERE nombre LIKE '%$buscar%' or autor LIKE '%$buscar%'";
+                                          $resultado = mysqli_query($conn, $query);
+                                        }
+                                        ?>
+                            <?php while ($row = mysqli_fetch_array($resultado)) {?>
+                            <?php if (isset($row['id_char'])) { ?>
+
+                                        <div class="row item-search">
+                                            <div class="col-1 sh-icon">
+                                                <a class='youtubevideo' src='https://www.youtube.com/embed/<?php echo $row['link_video'] ?>' href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube"><img src="assets/img/biblioteca/icon-video.svg" alt="Icono Video"></a>
+                                            </div>
+
+                                            <div class="col-2 sh-categoria">
+                                                <h5 class="cat-charlas"><?php echo $row['nombre_cat']?></h5>
+                                            </div>
+
+                                            <div class="col-7 sh-titulo">
+                                                <h5><?php echo $row['nombre'] ?></h5>
+                                                <h4><svg xmlns="http://www.w3.org/2000/svg" width="15.8" height="18.434" viewBox="0 0 15.8 18.434">
+                                                        <path id="Icon_material-person-pin" data-name="Icon material-person-pin" d="M18.544,3H6.256A1.755,1.755,0,0,0,4.5,4.756V17.044A1.755,1.755,0,0,0,6.256,18.8H9.767L12.4,21.433,15.033,18.8h3.511A1.761,1.761,0,0,0,20.3,17.044V4.756A1.761,1.761,0,0,0,18.544,3ZM12.4,5.9a2.37,2.37,0,1,1-2.37,2.37A2.371,2.371,0,0,1,12.4,5.9Zm5.267,9.392H7.133V14.5c0-1.756,3.511-2.721,5.267-2.721s5.267.966,5.267,2.721Z" transform="translate(-4.5 -3)" fill="#707070"/>
+                                                    </svg><?php echo $row['autor']; ?>
+                                                </h4>
+
+                                                <!-- FILTRO DOCUMENTOS -->
+                                                <?php
+                                                $idcharla = $row['id_char'];
+                                                $query = "SELECT *
+                                                FROM documentos D
+                                                INNER JOIN charlas C
+                                                ON D.id_charla_doc = C.id_char
+                                                WHERE id_charla_doc = $idcharla";
+                                                $result_task1 = mysqli_query($conn, $query);
+                                                while ($row = mysqli_fetch_Array($result_task1)) {
+                                                    ?>
+                                                    <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                        </svg>
+                                                        <a href="<?php echo $row['ruta_doc'] ?>" download="<?php echo $row['nombre_doc'] ?>"><?php echo $row['nombre_doc'] ?></a></p>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <!-- FIN FILTRO DOCUMENTOS -->
+                                            </div>
+
+                                            <div class="col-2 sh-fecha">
+                                                <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                                    </svg>
+                                                    <?php echo date("d-m-Y", strtotime($row['create_at'])); ?></p>
+                                                <p><?php echo $row['nombre_cat'] ?></p>
+                                            </div>
+
+
+                                        </div>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+
+                            <?php
+                            $buscar = $_POST['buscar'];
+                            if (!empty($buscar)) {
+                                $query = "SELECT *
+                                          FROM procedimientos C
+                                          INNER JOIN usuarios U
+                                          ON C.id_usuario = U.id_usuario
+                                          JOIN categorias CA
+                                          ON C.id_categoria = CA.id_cat
+                                          WHERE nombre LIKE '%$buscar%' or autor LIKE '%$buscar%'";
+                                          $resultado = mysqli_query($conn, $query);
+                            }
+                            ?>
+                            <?php
+                            while ($row = mysqli_fetch_array($resultado)) {
+                                ?>
+                                <?php
+                                if (isset($row['id_proc'])) {
+                                    ?>
+                                    <div class="row item-search">
+                                        <div class="col-1 sh-icon">
+                                            <a class='youtubevideo' src='https://www.youtube.com/embed/<?php echo $row['link_video'] ?>' href="#videoyoutube" data-bs-toggle="modal" data-bs-target="#videoyoutube">
+                                                <img src="assets/img/biblioteca/icon-video.svg" alt="Icono Video">
+                                            </a>
+                                        </div>
+
+                                        <div class="col-2 sh-categoria">
+                                            <h5 class="cat-procedimientos">Procedimientos</h5>
+                                        </div>
+
+                                        <div class="col-7 sh-titulo">
+                                            <h5><?php echo $row['nombre'] ?></h5>
+                                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="15.8" height="18.434" viewBox="0 0 15.8 18.434">
+                                                    <path id="Icon_material-person-pin" data-name="Icon material-person-pin" d="M18.544,3H6.256A1.755,1.755,0,0,0,4.5,4.756V17.044A1.755,1.755,0,0,0,6.256,18.8H9.767L12.4,21.433,15.033,18.8h3.511A1.761,1.761,0,0,0,20.3,17.044V4.756A1.761,1.761,0,0,0,18.544,3ZM12.4,5.9a2.37,2.37,0,1,1-2.37,2.37A2.371,2.371,0,0,1,12.4,5.9Zm5.267,9.392H7.133V14.5c0-1.756,3.511-2.721,5.267-2.721s5.267.966,5.267,2.721Z" transform="translate(-4.5 -3)" fill="#707070"/>
+                                                </svg><?php echo $row['autor']; ?>
+                                            </h4>
+
+                                            <!-- FILTRO DOCUMENTOS -->
+                                            <?php
+                                            $idcharla = $row['id_char'];
+                                            $query = "SELECT *
+                                                FROM documentos D
+                                                INNER JOIN charlas C
+                                                ON D.id_charla_doc = C.id_char
+                                                WHERE id_charla_doc = $idcharla";
+                                            $result_task1 = mysqli_query($conn, $query);
+                                            while ($row = mysqli_fetch_Array($result_task1)) {
+                                                ?>
+                                                <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                                    </svg>
+                                                    <a href="<?php echo $row['ruta_doc'] ?>" download="<?php echo $row['nombre_doc'] ?>"><?php echo $row['nombre_doc'] ?></a></p>
+                                                <?php
+                                            }
+                                            ?>
+                                            <!-- FIN FILTRO DOCUMENTOS -->
+                                        </div>
+
+                                        <div class="col-2 sh-fecha">
+                                            <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                                </svg>
+                                                <?php echo date("d-m-Y", strtotime($row['create_at'])); ?></p>
+                                            <p><?php echo $row['nombre_cat'] ?></p>
+                                        </div>
+
+
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </div>
+
                     </div>
                 </div>
             </div>
-            <div class="col-7">
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-charlas-tab">
-                        <!-- Consulta bdd -->
-                        <?php
 
-                        $buscar = $_POST['buscar'];
+            <div class="d-flex flex-row align-items-center justify-content-center news-vermas">
+                <a href="biblioteca.php">Volver</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- Modal -->
 
-
-                        if (!empty($buscar)) {
-                            $query = "SELECT *
-                            FROM charlas C
-                            INNER JOIN usuarios U
-                            ON C.id_usuario = U.id_usuario
-                            JOIN categorias CA
-                            ON C.id_categoria = CA.id_cat
-                            JOIN categorias_2 CA2
-                            ON C.id_categoria_2 = CA2.id_cat_2
-                            WHERE nombre LIKE '%$buscar%' or autor LIKE '%$buscar%'";
-                            $resultado = mysqli_query($conn, $query);
-                        }
-                        ?>
-                        <?php
-                        while ($row = mysqli_fetch_array($resultado)) {
-                        ?>
-                            <?php
-                            if (isset($row['id_char'])) {
-                            ?>
-                                <div class="menu-content">
-                                    <div class="etiquetas">
-                                        <div class="categoria">
-                                            <h5 class="h5"><?php echo $row['nombre_cat'] ?></h5>
-                                        </div>
-                                        <div class="categoria2">
-                                            <h5 class="h5"><?php echo $row['nombre_cat_2'] ?></h5>
-                                        </div>
-                                        <!--<a href="" class="btn color2"> Medio ambiente </a> -->
-                                    </div>
-                                    <div class="row col-12">
-                                        <h1><?php echo $row['nombre'] ?></h1>
-                                        <h4><?php echo $row['autor']; ?></h4>
-                                    </div>
-                                    <div class="row col-12 pt-2">
-                                        <div class="col-10">
-                                            <p>Fecha publicación: <?php echo date("d-m-Y", strtotime($row['create_at'])); ?></p>
-                                        </div>
-                                        <div class="col-2">
-                                            <form action="detalle-charla.php" method="post">
-                                                <input type="hidden" name="id_char" id="id_char" value="<?php echo $row['id_char'] ?>">
-                                                <input class="btn color3 ps-xxl-4 pe-xxl-4" type="submit" name="edit" value="Ver">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                        <?php
-                        $buscar = $_POST['buscar'];
-                        if (!empty($buscar)) {
-                            $query = "SELECT *
-                            FROM procedimientos C
-                            INNER JOIN usuarios U
-                            ON C.id_usuario = U.id_usuario
-                            JOIN categorias CA
-                            ON C.id_categoria = CA.id_cat
-                            WHERE nombre LIKE '%$buscar%' or autor LIKE '%$buscar%'";
-                            $resultado = mysqli_query($conn, $query);
-                        }
-                        ?>
-                        <?php
-                        while ($row = mysqli_fetch_array($resultado)) {
-                        ?>
-                            <?php
-                            if (isset($row['id_proc'])) {
-                            ?>
-                                <div class="menu-content">
-                                    <div class="etiquetas">
-                                        <div class="categoria">
-                                            <h5 class="h5">Procedimientos</h5>
-                                        </div>
-
-                                        <!--<a href="" class="btn color2"> Medio ambiente </a> -->
-                                    </div>
-                                    <div class="row col-12">
-                                        <h1><?php echo $row['nombre'] ?></h1>
-                                        <h4><?php echo $row['autor']; ?></h4>
-                                    </div>
-                                    <div class="row col-12 pt-2">
-                                        <div class="col-10">
-                                            <p>Fecha publicación: <?php echo date("d-m-Y", strtotime($row['create_at'])); ?></p>
-                                        </div>
-                                        <div class="col-2">
-
-                                            <form action="detalle-procedimiento.php" method="post">
-                                                <input type="hidden" name="id_proc" id="id_proc" value="<?php echo $row['id_proc'] ?>">
-                                                <input class="btn color3 ps-xxl-4 pe-xxl-4" type="submit" name="edit" value="Ver">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </div>
-
+    <div class="modal fade" id="videoyoutube" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-video-body">
+                    <iframe id='youtubeplay' width="799" height="460" src="" title="Standly - Panamera (Video Oficial)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-
         </div>
     </div>
-
 
     <!-- Footer-->
     <?php include('includes/footer.php') ?>
@@ -196,9 +245,9 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/carrousel.js"></script>
+
     <script src="js/scripts.js"></script>
-    <script src="js/slider.js"></script>
+
     <!-- Carrucel Equipo JS -->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->

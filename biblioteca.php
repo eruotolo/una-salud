@@ -54,15 +54,20 @@
 <?php include('includes/nav.php') ?>
 <!-- HEADER SLIDER-->
 
-<section id="new-biblioteca">
+<section id="sh-buscador">
     <div class="container head-biblioteca">
-        <div class="d-flex flex-row justify-content-between align-items-center title-biblioteca">
-            <h1>Biblioteca</h1>
-            <?php include('includes/buscador.php') ?>
+        <div class="row">
+            <div class="col-5 title-biblioteca">
+                <h1>Biblioteca</h1>
+            </div>
+            <div class="col-7">
+                <?php include('includes/buscador.php') ?>
+            </div>
         </div>
-
     </div>
+</section>
 
+<section id="new-biblioteca">
     <div id="filtro-biblioteca" class="container ">
         <div class="d-flex flex-row filtro-biblioteca align-items-center">
             <p>Categoría</p>
